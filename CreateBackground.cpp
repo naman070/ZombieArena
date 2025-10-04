@@ -1,4 +1,5 @@
 #include "ZombieArena.h"
+#include "RandomGenerator.h"
 #include<SFML/Graphics.hpp>
 
 int createBackground(sf::VertexArray &rVA, sf::IntRect arena){
@@ -47,8 +48,7 @@ int createBackground(sf::VertexArray &rVA, sf::IntRect arena){
             }
             else{
                 // Use a random floor texture: grass, stone or bush
-                srand((int)time(0) + h * w - h);
-                int num = (rand() % TILE_TYPES);
+                int num = RandomGenerator::getInstance().getInt(0, TILE_TYPES-1);
                 int verticalOffset = num * TILE_SIZE;
                 texTopLeft = sf::Vector2f(0, verticalOffset);
                 texTopRight = sf::Vector2f(TILE_SIZE, verticalOffset);
